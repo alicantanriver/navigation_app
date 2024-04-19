@@ -37,10 +37,15 @@ dependencies:
   cupertino_icons: ^1.0.6
   google_maps_webservice: ^0.0.20-nullsafety.5
   google_maps_flutter: ^2.6.1
+  flutter_launcher_icons: ^0.13.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
+flutter_icons:
+  android: true
+  image_path: "assets/map.png"
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -59,6 +64,8 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+  assets:
+    - assets/map.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:
