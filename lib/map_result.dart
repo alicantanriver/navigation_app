@@ -8,14 +8,8 @@ class MapResult {
   String? duration;
   LatLngBounds? bounds;
 
-  MapResult.emptyResult() {}
+  MapResult.emptyResult();
 
-  MapResult(DirectionsResponse? route, List<LatLng>? routePoints,
-      String? distance, String? duration, LatLngBounds? bounds) {
-    this.route = route;
-    this.routePoints = routePoints;
-    this.distance = distance;
-    this.duration = duration;
-    this.bounds = bounds;
-  }
+  MapResult(
+      this.route, this.routePoints, this.distance, this.duration, this.bounds);
 }

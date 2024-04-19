@@ -28,7 +28,7 @@ class MapService {
       bounds = _boundsFromLatLngList(routePoints);
     }
 
-    return new MapResult(route, routePoints, distance, duration, bounds);
+    return MapResult(route, routePoints, distance, duration, bounds);
   }
 
   List<LatLng> _decodePolyline(String encoded) {

@@ -23,8 +23,8 @@ class NavigationPageState extends State<NavigationPage> {
   late GoogleMapController _mapController;
   final _startAddressController = TextEditingController();
   final _destinationAddressController = TextEditingController();
-  final _mapService = new MapService();
-  MapResult mapResult = new MapResult.emptyResult();
+  final _mapService = MapService();
+  MapResult mapResult = MapResult.emptyResult();
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -48,7 +48,8 @@ class NavigationPageState extends State<NavigationPage> {
                       return null;
                     },
                     controller: _startAddressController,
-                    decoration: InputDecoration(labelText: 'Start Address'),
+                    decoration:
+                        const InputDecoration(labelText: 'Start Address'),
                   ),
                 ),
                 Padding(
@@ -62,7 +63,7 @@ class NavigationPageState extends State<NavigationPage> {
                     },
                     controller: _destinationAddressController,
                     decoration:
-                        InputDecoration(labelText: 'Destination Address'),
+                        const InputDecoration(labelText: 'Destination Address'),
                   ),
                 ),
                 ElevatedButton(
@@ -75,8 +76,8 @@ class NavigationPageState extends State<NavigationPage> {
                 ),
               ])),
           if (mapResult.route != null && !mapResult.route!.isOkay)
-            Padding(
-              padding: const EdgeInsets.all(8.0),
+            const Padding(
+              padding: EdgeInsets.all(8.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -124,18 +125,18 @@ class NavigationPageState extends State<NavigationPage> {
   }
 
   Future<void> _calculateRoute() async {
-    final _mapResult = await _mapService.calculateRoute(
+    final mapResult1 = await _mapService.calculateRoute(
         _startAddressController.text,
         _destinationAddressController.text,
         TravelMode.walking);
 
-    if (!_mapResult.route!.isOkay) {}
+    if (!mapResult1.route!.isOkay) {}
 
     setState(() {
-      mapResult = _mapResult;
+      mapResult = mapResult1;
     });
 
     _mapController
-        .animateCamera(CameraUpdate.newLatLngBounds(_mapResult.bounds!, 50));
+        .animateCamera(CameraUpdate.newLatLngBounds(mapResult1.bounds!, 50));
   }
 }
