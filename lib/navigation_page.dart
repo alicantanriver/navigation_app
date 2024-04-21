@@ -32,6 +32,10 @@ class NavigationPageState extends State<NavigationPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Navigation App'),
+        leading: const Icon(
+          Icons.directions_walk_outlined,
+          size: 27.0,
+        ),
       ),
       body: Column(
         children: <Widget>[
