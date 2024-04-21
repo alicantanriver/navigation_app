@@ -18,7 +18,7 @@ class App extends StatelessWidget {
               displayColor: const Color(0xFF174547),
             ),
         colorScheme: const ColorScheme.light(
-          primary: Color(0xFFFFF8F0),
+          primary: Color.fromARGB(255, 170, 93, 4),
           secondary: Color(0xFF174547),
           tertiary: Color(0xFF68A691),
         ),
@@ -35,42 +35,7 @@ class App extends StatelessWidget {
               ),
             ],
           ),
-          // actionsIconTheme: const IconThemeData(
-          //   color: Color(0xFF174547),
-          //   shadows: [],
-          // ),
         ),
-        filledButtonTheme: FilledButtonThemeData(
-          style: ButtonStyle(
-            backgroundColor:
-                MaterialStateProperty.all<Color>(const Color(0xE8FFCA51)),
-            foregroundColor:
-                MaterialStateProperty.all<Color>(const Color(0xFF181818)),
-            shadowColor:
-                MaterialStateProperty.all<Color>(const Color(0xFF68A691)),
-            iconColor:
-                MaterialStateProperty.all<Color>(const Color(0xFFFFF8F0)),
-            iconSize: MaterialStateProperty.all<double>(35),
-            textStyle: MaterialStateProperty.all<TextStyle>(
-              const TextStyle(
-                color: Color(0xFFFFF8F0),
-                fontSize: 25,
-              ),
-            ),
-            padding: MaterialStateProperty.all<EdgeInsets>(
-              const EdgeInsets.symmetric(horizontal: 25, vertical: 12),
-            ),
-            elevation: MaterialStateProperty.all<double>(3),
-          ),
-        ),
-        // iconButtonTheme: IconButtonThemeData(
-        //   style: ButtonStyle(
-        //     shadowColor:
-        //         MaterialStateProperty.all<Color>(const Color(0xFF174547)),
-        //     iconColor:
-        //         MaterialStateProperty.all<Color>(const Color(0xFF174547)),
-        //   ),
-        // ),
       ),
       home: const NavigationPage(),
     );
