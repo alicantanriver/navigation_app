@@ -1,10 +1,10 @@
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:google_maps_webservice/directions.dart';
+import 'package:navigation_app/api_keys.dart';
 import 'package:navigation_app/map_result.dart';
 
 class MapService {
-  final directions =
-      GoogleMapsDirections(apiKey: 'AIzaSyB7D2exC22ybsWoKOhed_xQAVSvUP1rqak');
+  final directions = GoogleMapsDirections(apiKey: googleMapsApiKey);
 
   Future<MapResult> calculateRoute(
       String start, String destination, TravelMode mode) async {

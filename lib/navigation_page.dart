@@ -66,13 +66,16 @@ class NavigationPageState extends State<NavigationPage> {
                         const InputDecoration(labelText: 'Destination Address'),
                   ),
                 ),
-                ElevatedButton(
-                  onPressed: () {
-                    if (_formKey.currentState!.validate()) {
-                      _calculateRoute();
-                    }
-                  },
-                  child: const Text('Calculate Route'),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        _calculateRoute();
+                      }
+                    },
+                    child: const Text('Calculate Route'),
+                  ),
                 ),
               ])),
           if (mapResult.route != null && !mapResult.route!.isOkay)
