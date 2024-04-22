@@ -8,11 +8,8 @@ class MapService {
 
   Future<MapResult> calculateRoute(
       String start, String destination, TravelMode mode) async {
-    DirectionsResponse route = await directions.directionsWithAddress(
-      start,
-      destination,
-      travelMode: mode,
-    );
+    DirectionsResponse route = await directions
+        .directionsWithAddress(start, destination, travelMode: mode);
 
     List<LatLng>? routePoints = [];
     String? distance;

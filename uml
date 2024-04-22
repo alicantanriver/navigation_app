@@ -1,0 +1,56 @@
+@startuml
+set namespaceSeparator ::
+
+class "navigation_app::app.dart::App" {
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "navigation_app::app.dart::App"
+
+class "navigation_app::map_result.dart::MapResult" {
+  +DirectionsResponse? route
+  +List<LatLng>? routePoints
+  +String? distance
+  +String? duration
+  +LatLngBounds? bounds
+}
+
+"navigation_app::map_result.dart::MapResult" o-- "google_maps_webservice::src::directions.dart::DirectionsResponse"
+"navigation_app::map_result.dart::MapResult" o-- "google_maps_flutter_platform_interface::src::types::location.dart::LatLngBounds"
+
+class "navigation_app::map_service.dart::MapService" {
+  +GoogleMapsDirections directions
+  +dynamic calculateRoute()
+  -List<LatLng> _decodePolyline()
+  -LatLngBounds _boundsFromLatLngList()
+}
+
+"navigation_app::map_service.dart::MapService" o-- "google_maps_webservice::src::directions.dart::GoogleMapsDirections"
+
+class "navigation_app::navigation_page.dart::NavigationPage" {
+  +NavigationPageState createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "navigation_app::navigation_page.dart::NavigationPage"
+
+class "navigation_app::navigation_page.dart::NavigationPageState" {
+  -GoogleMapController _mapController
+  -TextEditingController _startAddressController
+  -TextEditingController _destinationAddressController
+  -MapService _mapService
+  -MapResult _mapResult
+  -GlobalKey<FormState> _formKey
+  +Widget build()
+  -void _onMapCreated()
+  -dynamic _calculateRoute()
+}
+
+"navigation_app::navigation_page.dart::NavigationPageState" o-- "google_maps_flutter::google_maps_flutter.dart::GoogleMapController"
+"navigation_app::navigation_page.dart::NavigationPageState" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"navigation_app::navigation_page.dart::NavigationPageState" o-- "navigation_app::map_service.dart::MapService"
+"navigation_app::navigation_page.dart::NavigationPageState" o-- "navigation_app::map_result.dart::MapResult"
+"navigation_app::navigation_page.dart::NavigationPageState" o-- "flutter::src::widgets::framework.dart::GlobalKey<FormState>"
+"flutter::src::widgets::framework.dart::State" <|-- "navigation_app::navigation_page.dart::NavigationPageState"
+
+
+@enduml

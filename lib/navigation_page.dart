@@ -24,7 +24,7 @@ class NavigationPageState extends State<NavigationPage> {
   final _startAddressController = TextEditingController();
   final _destinationAddressController = TextEditingController();
   final _mapService = MapService();
-  MapResult mapResult = MapResult.emptyResult();
+  MapResult _mapResult = MapResult.emptyResult();
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -47,7 +47,7 @@ class NavigationPageState extends State<NavigationPage> {
                   child: TextFormField(
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'Please enter some text';
+                        return 'Please enter an address';
                       }
                       return null;
                     },
@@ -61,7 +61,7 @@ class NavigationPageState extends State<NavigationPage> {
                   child: TextFormField(
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'Please enter some text';
+                        return 'Please enter an address';
                       }
                       return null;
                     },
@@ -82,7 +82,7 @@ class NavigationPageState extends State<NavigationPage> {
                   ),
                 ),
               ])),
-          if (mapResult.route != null && !mapResult.route!.isOkay)
+          if (_mapResult.route != null && !_mapResult.route!.isOkay)
             const Padding(
               padding: EdgeInsets.all(8.0),
               child: Column(
@@ -101,7 +101,7 @@ class NavigationPageState extends State<NavigationPage> {
               polylines: {
                 Polyline(
                   polylineId: const PolylineId('route'),
-                  points: mapResult.routePoints ?? [],
+                  points: _mapResult.routePoints ?? [],
                   color: Colors.blue,
                   width: 5,
                 ),
@@ -112,12 +112,12 @@ class NavigationPageState extends State<NavigationPage> {
               ),
             ),
           ),
-          if (mapResult.route != null && mapResult.distance != null)
+          if (_mapResult.route != null && _mapResult.distance != null)
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: [Text('Walking Distance: ${mapResult.distance}')],
+                children: [Text('Walking Distance: ${_mapResult.distance}')],
               ),
             ),
         ],
@@ -132,18 +132,18 @@ class NavigationPageState extends State<NavigationPage> {
   }
 
   Future<void> _calculateRoute() async {
-    final mapResult1 = await _mapService.calculateRoute(
+    final result = await _mapService.calculateRoute(
         _startAddressController.text,
         _destinationAddressController.text,
         TravelMode.walking);
 
-    if (!mapResult1.route!.isOkay) {}
-
     setState(() {
-      mapResult = mapResult1;
+      _mapResult = result;
     });
 
-    _mapController
-        .animateCamera(CameraUpdate.newLatLngBounds(mapResult1.bounds!, 50));
+    if (result.bounds != null) {
+      _mapController
+          .animateCamera(CameraUpdate.newLatLngBounds(result.bounds!, 50));
+    }
   }
 }
